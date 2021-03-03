@@ -4,10 +4,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//React Redux
+import { applyMiddleware, createStore, compose } from "redux";
+import { Provider } from 'react-redux'
+import rootReducer from './store/reducers/rootReducer';
+import thunk from 'redux-thunk'
+
+import {reduxFirestore, getFirestore } from 'redux-firestore'
+import {reduxFirebase, getFirebase } from 'react-redux-firebase'
+
+//importing firebase configuration
+import fbConfig from './store/reducers/config/fbConfig'
+
+const store = createStore(rootReducer, 
+   compose (
+     applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+     reduxFirebase(fbConfig),
+     reduxFirestore(fbConfig)
+    )
+   )
+
 ReactDOM.render(
-  <React.StrictMode>
+ <Provider store={store}>
+    <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+ </Provider>,
   document.getElementById('root')
 );
 
