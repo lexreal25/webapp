@@ -11,7 +11,7 @@ import rootReducer from './store/reducers/rootReducer';
 import thunk from 'redux-thunk'
 
 import {reduxFirestore, getFirestore } from 'redux-firestore'
-import {reduxFirebase, getFirebase } from 'react-redux-firebase'
+import {getFirebase, reactReduxFirebase } from 'react-redux-firebase'
 
 //importing firebase configuration
 import fbConfig from './store/reducers/config/fbConfig'
@@ -19,19 +19,24 @@ import fbConfig from './store/reducers/config/fbConfig'
 const store = createStore(rootReducer, 
    compose (
      applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-     reduxFirebase(fbConfig),
-     reduxFirestore(fbConfig)
+     reduxFirestore(fbConfig),
+     reactReduxFirebase(fbConfig, {userFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true}) //the second parameter prevents rendering to the dome before connecting to firebase
     )
    )
+//userFirestoreProfile enable us to access the user profile on the console
+store.firebaseAuthIsReady.then(() => {
+    
+  ReactDOM.render(
+    <Provider store={store}>
+      <React.StrictMode>
+      <App />
+    </React.StrictMode>
+    </Provider>,
+    document.getElementById('root')
+  );
+ 
+   })
 
-ReactDOM.render(
- <Provider store={store}>
-    <React.StrictMode>
-    <App />
-  </React.StrictMode>
- </Provider>,
-  document.getElementById('root')
-);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

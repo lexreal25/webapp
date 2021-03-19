@@ -15,20 +15,5 @@
   firebase.initializeApp(firebaseConfig);
   firebase.firestore().settings({timestampsInSnapchot:true})
 
-/*
- var firebaseConfig = {
-    apiKey: "AIzaSyASLDIfp5QURpXlm_nR02MPP9ffdjfjLfM",
-    authDomain: "fir-tutorial-12b4d.firebaseapp.com",
-    databaseURL: "https://fir-tutorial-12b4d.firebaseio.com",
-    projectId: "fir-tutorial-12b4d",
-    storageBucket: "fir-tutorial-12b4d.appspot.com",
-    messagingSenderId: "853773556715",
-    appId: "1:853773556715:web:4af9656e76c080eec817ae",
-    measurementId: "G-2QTMK8602V"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-*/
 
   export default firebase;
