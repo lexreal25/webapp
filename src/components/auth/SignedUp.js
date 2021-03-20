@@ -18,14 +18,7 @@ class SignedUp extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.signUp(this.state)
-        // this.setState({
-        //     email: '',
-        //     password: '',
-        //     firstName: '',
-        //     lastName: ''
-        // })
-        
+        this.props.signUp(this.state)  
     }
 
     render() {
@@ -75,6 +68,7 @@ const mapStateToProps = (state) => {
     }
 }
 
+//mapDispatchToProps is used to make api requests
 const mapDispatchToProps = (dispatch) => {
     return {
         signUp: (newUser) => dispatch(signUp(newUser))
